@@ -1,0 +1,65 @@
+{
+  "entities": {
+    "Task": {
+      "title": "Task",
+      "description": "A pending or completed task with deadline and AI analysis details",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "deadline": { "type": "string", "format": "date-time" },
+        "estimatedHours": { "type": "number" },
+        "importance": { "type": "string", "enum": ["low", "medium", "high"] },
+        "status": { "type": "string", "enum": ["pending", "completed"] },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "aiPriorityScore": { "type": "integer" },
+        "aiPriorityExplanation": { "type": "string" },
+        "riskLevel": { "type": "string", "enum": ["low", "medium", "high", "critical"] },
+        "riskExplanation": { "type": "string" }
+      },
+      "required": ["id", "title", "deadline", "estimatedHours", "importance", "status", "createdAt"]
+    },
+    "ScheduleItem": {
+      "title": "ScheduleItem",
+      "description": "An AI-allocated daily schedule block for a specific task",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "taskId": { "type": "string" },
+        "taskTitle": { "type": "string" },
+        "startTime": { "type": "string" },
+        "endTime": { "type": "string" },
+        "durationMinutes": { "type": "integer" },
+        "notes": { "type": "string" },
+        "date": { "type": "string" }
+      },
+      "required": ["id", "taskId", "taskTitle", "startTime", "endTime", "durationMinutes", "date"]
+    },
+    "ChatMessage": {
+      "title": "ChatMessage",
+      "description": "A message exchanged with the AI productivity coach chatbot",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "sender": { "type": "string", "enum": ["user", "coach"] },
+        "text": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "sender", "text", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "Collection of tasks added by users with AI deadline risk estimations"
+    },
+    "/schedule/{scheduleId}": {
+      "schema": "ScheduleItem",
+      "description": "AI-generated hourly daily schedule items"
+    },
+    "/messages/{messageId}": {
+      "schema": "ChatMessage",
+      "description": "Conversational messages with the Nexa Productivity Coach chatbot"
+    }
+  }
+}

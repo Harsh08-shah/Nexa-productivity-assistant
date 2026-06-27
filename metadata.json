@@ -1,0 +1,6 @@
+{
+  "name": "Nexa",
+  "description": "A modern full-stack AI-driven productivity suite that proactively helps students and professionals avoid missed deadlines through smart schedule planning, dynamic risk prediction, and a personalized productivity coach chatbot.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
